@@ -1,10 +1,13 @@
 package main
 
 import (
+	"context"
 	"github.com/Ladence/golang_base_kubernetes/internal/server"
 	"github.com/Ladence/golang_base_kubernetes/internal/version"
 	log "github.com/sirupsen/logrus"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 func logInit() {
@@ -22,11 +25,22 @@ func main() {
 		logger.Fatal("Port is empty!")
 	}
 
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+
 	logger.Infof(
 		"Starting the service...\ncommit: %s, build time: %s, release: %s",
 		version.Commit, version.BuildTime, version.Release,
 	)
-	srv := server.NewServer(logger)
 	logger.Info("The service is ready to listen and serve.")
-	logger.Fatal(srv.Run("8080"))
+	srv := server.NewServer(logger, port)
+	go func() {
+		logger.Fatal(srv.Run())
+	}()
+
+	sig := <-c
+	logger.Infof("Got signal: %v", sig)
+	if err := srv.Shutdown(context.Background()); err != nil {
+		logger.Fatal("Error on shutting down server. Error: %v", err)
+	}
 }
