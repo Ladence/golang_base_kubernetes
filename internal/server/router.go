@@ -11,13 +11,13 @@ import (
 )
 
 func NewRouter() *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/home", home).Methods("GET")
+	router := mux.NewRouter()
+	router.HandleFunc("/home", home).Methods("GET")
 
-	r.HandleFunc("/healthz", healthCheck)
-	r.HandleFunc("/readyz", readyCheck)
+	router.HandleFunc("/healthz", healthCheck)
+	router.HandleFunc("/readyz", readyCheck)
 
-	return r
+	return router
 }
 
 func home(w http.ResponseWriter, r *http.Request) {

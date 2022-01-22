@@ -1,5 +1,7 @@
 package server
 
+//nolint
+
 import (
 	"encoding/json"
 	"github.com/Ladence/golang_base_kubernetes/internal/api"
@@ -11,10 +13,10 @@ import (
 
 func TestRouter(t *testing.T) {
 	r := NewRouter()
-	ts := httptest.NewServer(r)
-	defer ts.Close()
+	testServer := httptest.NewServer(r)
+	defer testServer.Close()
 
-	res, err := http.Get(ts.URL + "/home")
+	res, err := http.Get(testServer.URL + "/home")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22,7 +24,7 @@ func TestRouter(t *testing.T) {
 		t.Errorf("Status code for /home is wrong. Have: %v, want: %v", res.StatusCode, http.StatusOK)
 	}
 
-	res, err = http.Post(ts.URL+"/home", "text/plain", nil)
+	res, err = http.Post(testServer.URL+"/home", "text/plain", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -30,7 +32,7 @@ func TestRouter(t *testing.T) {
 		t.Errorf("Status code for POST /home is wrong. Have: %v, want: %v", res.StatusCode, http.StatusMethodNotAllowed)
 	}
 
-	res, err = http.Get(ts.URL + "/not-exist")
+	res, err = http.Get(testServer.URL + "/not-exist")
 	if err != nil {
 		t.Fatal(err)
 	}

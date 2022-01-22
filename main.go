@@ -25,8 +25,8 @@ func main() {
 		logger.Fatal("Port is empty!")
 	}
 
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	sigchan := make(chan os.Signal, 1)
+	signal.Notify(sigchan, os.Interrupt, syscall.SIGTERM)
 
 	logger.Infof(
 		"Starting the service...\ncommit: %s, build time: %s, release: %s",
@@ -38,9 +38,9 @@ func main() {
 		logger.Fatal(srv.Run())
 	}()
 
-	sig := <-c
+	sig := <-sigchan
 	logger.Infof("Got signal: %v", sig)
 	if err := srv.Shutdown(context.Background()); err != nil {
-		logger.Fatal("Error on shutting down server. Error: %v", err)
+		logger.Fatalf("Error on shutting down server. Error: %v", err)
 	}
 }

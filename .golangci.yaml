@@ -6,3 +6,7 @@ linters:
     - tagliatelle
     - paralleltest
     - wrapcheck
+    - exhaustivestruct
+    - testpackage
+    - varnamelen
+    - nlreturn
