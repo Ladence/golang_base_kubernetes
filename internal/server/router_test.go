@@ -1,6 +1,7 @@
-package server
+//go:build !codeanalysis
+// +build !codeanalysis
 
-//nolint
+package server
 
 import (
 	"encoding/json"
