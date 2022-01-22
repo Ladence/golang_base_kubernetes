@@ -11,6 +11,8 @@ linters:
     - varnamelen
     - nlreturn
     - gochecknoglobals
+    - gofumpt
+    - goimports
 
 run:
   skip-files:
