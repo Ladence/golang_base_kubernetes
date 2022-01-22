@@ -2,8 +2,9 @@ package server
 
 import (
 	"context"
-	"github.com/sirupsen/logrus"
 	"net/http"
+
+	"github.com/sirupsen/logrus"
 )
 
 type Server struct {

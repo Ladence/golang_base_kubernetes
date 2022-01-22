@@ -5,11 +5,12 @@ package server
 
 import (
 	"encoding/json"
-	"github.com/Ladence/golang_base_kubernetes/internal/api"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/Ladence/golang_base_kubernetes/internal/api"
 )
 
 func TestRouter(t *testing.T) {
