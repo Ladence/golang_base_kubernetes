@@ -8,6 +8,7 @@ require (
 )
 
 require (
+	github.com/daixiang0/gci v0.2.9 // indirect
 	github.com/golangci/golangci-lint v1.43.0 // indirect
 	golang.org/x/sys v0.0.0-20211013075003-97ac67df715c // indirect
 )
