@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
-	"github.com/Ladence/golang_base_kubernetes/internal/server"
-	"github.com/Ladence/golang_base_kubernetes/internal/version"
-	log "github.com/sirupsen/logrus"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/Ladence/golang_base_kubernetes/internal/server"
+	"github.com/Ladence/golang_base_kubernetes/internal/version"
+	log "github.com/sirupsen/logrus"
 )
 
 func logInit() {
