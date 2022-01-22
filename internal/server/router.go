@@ -16,6 +16,7 @@ func NewRouter() *mux.Router {
 
 	r.HandleFunc("/healthz", healthCheck)
 	r.HandleFunc("/readyz", readyCheck)
+
 	return r
 }
 
