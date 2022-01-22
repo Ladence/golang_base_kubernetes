@@ -11,3 +11,7 @@ linters:
     - varnamelen
     - nlreturn
     - gochecknoglobals
+
+run:
+  skip-files:
+    - internal/server/router_test.go
