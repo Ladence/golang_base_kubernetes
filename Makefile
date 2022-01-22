@@ -39,5 +39,8 @@ minikube: push
     done > tmp.yaml
 	kubectl apply -f tmp.yaml
 
+lint: build
+	golangci-lint run --enable-all
+
 test:
 	go test -v -race ./...
